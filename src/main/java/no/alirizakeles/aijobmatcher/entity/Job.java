@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -21,4 +22,6 @@ public class Job {
     private String location;
     private String description;
     private String url;
+
+    private LocalDateTime createdAt;
 }
