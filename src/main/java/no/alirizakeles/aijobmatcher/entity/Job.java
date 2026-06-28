@@ -22,6 +22,7 @@ public class Job {
     private String location;
     private String description;
     private String url;
+    private String employmentType;
 
     private LocalDateTime createdAt;
 }
