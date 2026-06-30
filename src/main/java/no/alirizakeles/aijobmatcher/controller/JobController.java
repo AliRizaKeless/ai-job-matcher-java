@@ -22,4 +22,8 @@ public class JobController {
     public List<Job> getAllJobs() {
         return jobService.getAllJobs();
     }
+    @PostMapping("/api/jobs")
+    public Job createJob(@RequestBody Job job) {
+        return jobService.createJob(job);
+    }
 }

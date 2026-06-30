@@ -17,4 +17,7 @@ public class JobService {
     public List<Job> getAllJobs() {
         return jobRepository.findAll();
     }
+    public Job createJob(Job job) {
+        return jobRepository.save(job);
+    }
 }
