@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import no.alirizakeles.aijobmatcher.dto.CreateJobRequest;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class JobController {
         return jobService.getAllJobs();
     }
     @PostMapping("/api/jobs")
-    public Job createJob(@RequestBody CreateJobRequest request) {
+    public Job createJob(@Valid @RequestBody CreateJobRequest request) {
         return jobService.createJob(request);
     }
 }
