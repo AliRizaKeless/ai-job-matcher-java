@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import no.alirizakeles.aijobmatcher.dto.CreateJobRequest;
+import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public class JobController {
     @GetMapping("/api/jobs")
     public List<Job> getAllJobs() {
         return jobService.getAllJobs();
+    }
+    @GetMapping("/api/jobs/{id}")
+    public Job getJobById(@PathVariable Long id) {
+        return jobService.getJobById(id);
     }
     @PostMapping("/api/jobs")
     public Job createJob(@Valid @RequestBody CreateJobRequest request) {
