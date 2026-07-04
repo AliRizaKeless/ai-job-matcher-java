@@ -31,4 +31,7 @@ public class JobService {
 
         return jobRepository.save(job);
     }
+    public Job getJobById(Long id) {
+        return jobRepository.findById(id).orElse(null);
+    }
 }
