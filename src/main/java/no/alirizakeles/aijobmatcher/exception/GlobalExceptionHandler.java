@@ -30,6 +30,19 @@ public class GlobalExceptionHandler {
                 request.getRequestURI()
         );
     }
+    @ExceptionHandler(JobNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleJobNotFoundException(
+            JobNotFoundException ex,
+            HttpServletRequest request) {
 
+        return new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                "Job Not Found",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+    }
 }
 
