@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import no.alirizakeles.aijobmatcher.entity.Job;
 import no.alirizakeles.aijobmatcher.dto.CreateJobRequest;
 import no.alirizakeles.aijobmatcher.exception.JobNotFoundException;
+import no.alirizakeles.aijobmatcher.dto.UpdateJobRequest;
 
 import java.util.List;
 
@@ -35,5 +36,19 @@ public class JobService {
     public Job getJobById(Long id) {
         return jobRepository.findById(id)
                 .orElseThrow(() -> new JobNotFoundException(id));
+    }
+    public Job updateJob(Long id, UpdateJobRequest request) {
+
+        Job job = jobRepository.findById(id)
+                .orElseThrow(() -> new JobNotFoundException(id));
+
+        job.setTitle(request.getTitle());
+        job.setCompanyName(request.getCompanyName());
+        job.setLocation(request.getLocation());
+        job.setDescription(request.getDescription());
+        job.setUrl(request.getUrl());
+        job.setEmploymentType(request.getEmploymentType());
+
+        return jobRepository.save(job);
     }
 }
