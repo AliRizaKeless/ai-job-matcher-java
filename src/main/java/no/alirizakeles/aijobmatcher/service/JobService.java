@@ -51,4 +51,11 @@ public class JobService {
 
         return jobRepository.save(job);
     }
+    public void deleteJob(Long id) {
+
+        Job job = jobRepository.findById(id)
+                .orElseThrow(() -> new JobNotFoundException(id));
+
+        jobRepository.delete(job);
+    }
 }

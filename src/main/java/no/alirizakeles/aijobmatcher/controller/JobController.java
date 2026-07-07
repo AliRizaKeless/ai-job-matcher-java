@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.validation.Valid;
 import no.alirizakeles.aijobmatcher.dto.UpdateJobRequest;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -41,5 +44,10 @@ public class JobController {
             @Valid @RequestBody UpdateJobRequest request) {
 
         return jobService.updateJob(id, request);
+    }
+    @DeleteMapping("/api/jobs/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteJob(@PathVariable Long id) {
+        jobService.deleteJob(id);
     }
 }
