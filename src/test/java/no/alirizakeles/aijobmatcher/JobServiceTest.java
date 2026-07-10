@@ -25,6 +25,10 @@ class JobServiceTest {
     private JobService jobService;
 
     @Test
+    void contextLoads() {
+    }
+
+    @Test
     void getAllJobs_shouldReturnListOfJobs() {
         Job job = new Job();
         job.setId(1L);
