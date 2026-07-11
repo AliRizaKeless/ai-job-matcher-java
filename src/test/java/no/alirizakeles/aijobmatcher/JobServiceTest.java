@@ -39,7 +39,7 @@ class JobServiceTest {
         List<Job> result = jobService.getAllJobs();
 
         assertEquals(1, result.size());
-        assertEquals("Java Developer", result.getFirst().getTitle());
+        assertEquals("Java Developer", result.get(0).getTitle());
 
         verify(jobRepository).findAll();
     }
