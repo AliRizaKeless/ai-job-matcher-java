@@ -7,6 +7,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import no.alirizakeles.aijobmatcher.entity.Job;
+import no.alirizakeles.aijobmatcher.exception.JobNotFoundException;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -42,5 +47,14 @@ class JobServiceTest {
         assertEquals("Java Developer", result.get(0).getTitle());
 
         verify(jobRepository).findAll();
+    }
+    @Test
+    void getJobById_shouldThrowExceptionWhenJobNotFound() {
+
+        when(jobRepository.findById(99L)).thenReturn(Optional.empty());
+
+        assertThrows(JobNotFoundException.class, () -> jobService.getJobById(99L));
+
+        verify(jobRepository).findById(99L);
     }
 }
