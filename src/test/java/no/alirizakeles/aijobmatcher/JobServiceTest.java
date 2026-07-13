@@ -57,4 +57,17 @@ class JobServiceTest {
 
         verify(jobRepository).findById(99L);
     }
+    @Test
+    void deleteJob_shouldDeleteExistingJob() {
+
+        Job job = new Job();
+        job.setId(1L);
+
+        when(jobRepository.findById(1L)).thenReturn(Optional.of(job));
+
+        jobService.deleteJob(1L);
+
+        verify(jobRepository).findById(1L);
+        verify(jobRepository).delete(job);
+    }
 }
