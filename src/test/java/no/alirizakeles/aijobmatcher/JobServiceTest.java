@@ -8,7 +8,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import no.alirizakeles.aijobmatcher.entity.Job;
 import no.alirizakeles.aijobmatcher.exception.JobNotFoundException;
+import no.alirizakeles.aijobmatcher.dto.CreateJobRequest;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -69,5 +72,26 @@ class JobServiceTest {
 
         verify(jobRepository).findById(1L);
         verify(jobRepository).delete(job);
+    }
+    @Test
+    void createJob_shouldSaveJob() {
+
+        CreateJobRequest request = new CreateJobRequest();
+        request.setTitle("Java Developer");
+        request.setCompanyName("Capgemini");
+        request.setLocation("Oslo");
+
+        Job savedJob = new Job();
+        savedJob.setId(1L);
+        savedJob.setTitle("Java Developer");
+
+        when(jobRepository.save(any(Job.class))).thenReturn(savedJob);
+
+        Job result = jobService.createJob(request);
+
+        assertEquals(1L, result.getId());
+        assertEquals("Java Developer", result.getTitle());
+
+        verify(jobRepository).save(any(Job.class));
     }
 }
