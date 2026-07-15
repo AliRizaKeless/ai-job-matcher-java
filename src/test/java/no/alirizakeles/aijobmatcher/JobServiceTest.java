@@ -94,4 +94,20 @@ class JobServiceTest {
 
         verify(jobRepository).save(any(Job.class));
     }
+    @Test
+    void getJobById_shouldReturnJobWhenExists() {
+
+        Job job = new Job();
+        job.setId(1L);
+        job.setTitle("Java Developer");
+
+        when(jobRepository.findById(1L)).thenReturn(Optional.of(job));
+
+        Job result = jobService.getJobById(1L);
+
+        assertEquals(1L, result.getId());
+        assertEquals("Java Developer", result.getTitle());
+
+        verify(jobRepository).findById(1L);
+    }
 }
