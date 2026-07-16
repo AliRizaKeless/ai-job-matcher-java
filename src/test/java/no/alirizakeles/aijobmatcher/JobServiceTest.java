@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import no.alirizakeles.aijobmatcher.entity.Job;
 import no.alirizakeles.aijobmatcher.exception.JobNotFoundException;
 import no.alirizakeles.aijobmatcher.dto.CreateJobRequest;
+import no.alirizakeles.aijobmatcher.dto.UpdateJobRequest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -109,5 +110,30 @@ class JobServiceTest {
         assertEquals("Java Developer", result.getTitle());
 
         verify(jobRepository).findById(1L);
+    }
+    @Test
+    void updateJob_shouldUpdateExistingJob() {
+
+        Job existingJob = new Job();
+        existingJob.setId(1L);
+        existingJob.setTitle("Old Title");
+
+        UpdateJobRequest request = new UpdateJobRequest();
+        request.setTitle("New Title");
+        request.setCompanyName("Capgemini");
+        request.setLocation("Oslo");
+        request.setDescription("Updated description");
+        request.setUrl("https://example.com/job");
+        request.setEmploymentType("FULL_TIME");
+
+        when(jobRepository.findById(1L)).thenReturn(Optional.of(existingJob));
+        when(jobRepository.save(any(Job.class))).thenReturn(existingJob);
+
+        Job result = jobService.updateJob(1L, request);
+
+        assertEquals("New Title", result.getTitle());
+
+        verify(jobRepository).findById(1L);
+        verify(jobRepository).save(existingJob);
     }
 }
