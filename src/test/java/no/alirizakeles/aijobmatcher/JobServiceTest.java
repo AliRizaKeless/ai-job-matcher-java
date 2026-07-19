@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.never;
 
 @ExtendWith(MockitoExtension.class)
 class JobServiceTest {
@@ -61,7 +62,7 @@ class JobServiceTest {
         assertThrows(JobNotFoundException.class, () -> jobService.getJobById(99L));
 
         verify(jobRepository).findById(99L);
-        verify(jobRepository, times(1)).save(any(Job.class));
+        verify(jobRepository, never()).save(any(Job.class));
     }
     @Test
     void deleteJob_shouldDeleteExistingJob() {
