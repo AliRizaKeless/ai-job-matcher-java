@@ -58,4 +58,7 @@ public class JobService {
 
         jobRepository.delete(job);
     }
+    public List<Job> searchJobs(String keyword) {
+        return jobRepository.findByTitleContainingIgnoreCase(keyword);
+    }
 }
