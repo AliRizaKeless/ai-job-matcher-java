@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -33,6 +34,10 @@ public class JobController {
     @GetMapping("/api/jobs/{id}")
     public Job getJobById(@PathVariable Long id) {
         return jobService.getJobById(id);
+    }
+    @GetMapping("/api/jobs/search")
+    public List<Job> searchJobs(@RequestParam String keyword) {
+        return jobService.searchJobs(keyword);
     }
     @PostMapping("/api/jobs")
     public Job createJob(@Valid @RequestBody CreateJobRequest request) {
