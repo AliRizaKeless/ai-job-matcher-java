@@ -39,6 +39,10 @@ public class JobController {
     public List<Job> searchJobs(@RequestParam String keyword) {
         return jobService.searchJobs(keyword);
     }
+    @GetMapping("/api/jobs/search/location")
+    public List<Job> searchJobsByLocation(@RequestParam String location) {
+        return jobService.searchJobsByLocation(location);
+    }
     @PostMapping("/api/jobs")
     public Job createJob(@Valid @RequestBody CreateJobRequest request) {
         return jobService.createJob(request);

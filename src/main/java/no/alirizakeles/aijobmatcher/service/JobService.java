@@ -61,4 +61,7 @@ public class JobService {
     public List<Job> searchJobs(String keyword) {
         return jobRepository.findByTitleContainingIgnoreCase(keyword);
     }
+    public List<Job> searchJobsByLocation(String location) {
+        return jobRepository.findByLocationContainingIgnoreCase(location);
+    }
 }
